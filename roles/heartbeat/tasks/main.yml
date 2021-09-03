@@ -1,4 +1,11 @@
 ---
+
+- name: Create heartbeat search volume
+  docker_volume:
+    name: heartbeat
+    driver: local
+
+
 - name: Ensure heartbeat conf dir exists
   file:
     path: "{{ heartbeat_conf_dir }}"
@@ -53,7 +60,7 @@
     name: "{{ heartbeat_hostname }}"
     image: "{{ heartbeat_image }}"
     volumes:
-    - "{{ heartbeat_conf_dir }}:/usr/share/heartbeat/heartbeat.yml:ro"
+    - "hearbeat:/usr/share/heartbeat/heartbeat.yml:ro"
     networks:
     - name: "{{ network_name }}"
     log_driver: "{{ log_driver }}"
