@@ -1,0 +1,7 @@
+server.name: {{ server_name }}
+server.host: 0.0.0.0
+elasticsearch.hosts: ["http://{{ elasticsearch_hostname }}:9200"]
+monitoring.ui.container.elasticsearch.enabled: true
+
+elasticsearch.username: elastic
+elasticsearch.password: {{ elastic_password }}

@@ -1,0 +1,4 @@
+- hosts: "{{ ehosts | default('local') }}"
+  become: true
+  roles:
+  - clean

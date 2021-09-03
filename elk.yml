@@ -1,0 +1,10 @@
+---
+- hosts: "{{ ehosts | default('local') }}"
+  become: true
+  roles:
+  - { role: docker, tags: ["docker"] }
+  - { role: elasticsearch, tags: ["elasticsearch"] }
+  - { role: kibana, tags: ["kibana"] }
+  - { role: logstash, tags: ["logstash"] }
+  - { role: heartbeat, tags: ["heartbeat"] }
+ # - { role: haproxy, tags: ["haproxy"] }

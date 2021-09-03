@@ -1,0 +1,58 @@
+---
+- name: Remove elastic search container
+  docker_container:
+    name: "{{ elasticsearch_hostname }}"
+    state: absent
+  tags:
+  - elasticsearch
+
+- name: Clean elastic search conf dir
+  file:
+    state: absent
+    path: "{{ elasticsearch_conf_dir }}"
+  tags:
+  - elasticsearch
+
+- name: Remove kibana container
+  docker_container:
+    name: "{{ kibana_hostname }}"
+    state: absent
+  tags:
+  - kibana
+
+- name: Remove logstash container
+  docker_container:
+    name: "{{ logstash_hostname }}"
+    state: absent
+  tags:
+  - logstash
+
+- name: Clean logstash conf dir
+  file:
+    state: absent
+    path: "{{ logstash_conf_dir }}"
+  tags:
+  - logstash
+
+- name: Remove nginx container
+  docker_container:
+    name: "{{ nginx_hostname }}"
+    state: absent
+  tags:
+  - nginx
+
+#- name: Remove certbot container
+#  docker_container:
+#    name: "{{ certbot_hostname }}"
+#    state: absent
+#  tags:
+#  - nginx
+
+- name: Clean nginx conf dir
+  file:
+    state: absent
+    path: "{{ nginx_conf_dir }}"
+  tags:
+  - nginx
+
+

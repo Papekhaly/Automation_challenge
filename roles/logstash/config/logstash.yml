@@ -1,0 +1,6 @@
+http.host: "localhost"
+xpack.monitoring.elasticsearch.hosts: ["http://{{ elasticsearch_hostname }}:9200"]
+
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.username: elastic
+xpack.monitoring.elasticsearch.password: {{ elastic_password }}

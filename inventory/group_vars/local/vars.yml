@@ -1,0 +1,38 @@
+server_name: localhost
+network_name: mynet
+
+nginx_image: nginx:latest
+nginx_hostname: nginx01
+nginx_conf_dir: /home/Airbus_automation/roles/nginx/template
+
+haproxy_image: traefik:v2.0
+haproxy_hostname: haproxy
+haproxy_conf_dir: /urs/share/haproxy
+
+elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+elasticsearch_hostname: elasticsearch01
+elasticsearch_conf_dir: /usr/share/elasticsearch
+
+kibana_image: docker.elastic.co/kibana/kibana:7.3.2
+kibana_hostname: kibana01
+kibana_conf_dir: /usr/share/kibana
+
+logstash_image: docker.elastic.co/logstash/logstash:7.4.0
+logstash_hostname: logstash01
+logstash_conf_dir: /usr/share/logstash
+
+heartbeat_image: docker.elastic.co/beats/heartbeat:7.4.0
+heartbeat_hostname: heartbeatb01
+heartbeat_servername: status.example.com
+heartbeat_conf_dir: /usr/share/heartbeat
+heartbeat_urls:
+- https://example.com
+- https://status.example.com
+
+#certbot_image: certbot/certbot
+#certbot_hostname: certbot01
+#certbot_conf_dir: /home/Airbus_automation/roles/nginx/files
+#certbot_email: info@example.com
+
+elastic_password: "{{ vault_elastic_password }}"
+kibana_password: "{{ vault_kibana_password }}"

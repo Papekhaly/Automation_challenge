@@ -1,0 +1,42 @@
+- name: Ensure nginx conf dir exists
+  file:
+    path: "{{ nginx_conf_dir }}"
+    state: directory
+
+
+- name: Start nginx container
+  docker_container:
+    name: nginx01
+    image: "{{ nginx_image }}"
+    ports:
+    - 80:80
+    volumes:
+    - "{{ nginx_conf_dir }}/:/etc/nginx/conf.d/:ro"
+    log_driver: "{{ log_driver }}"
+    log_options:
+      max-size: "{{ log_max_size }}"
+      max-file: "{{ log_max_file }}"
+  
+
+- name: Copy nginx ssl conf
+  template:
+    src: templates/nginx-ssl.conf
+    dest: "{{ nginx_conf_dir }}/{{ server_name }}.conf"
+  notify: Restart nginx container
+
+
+- name: Start nginx container
+  docker_container:
+    name: nginx01
+    image: nginx:latest
+    ports:
+    - 80:80
+    - 9200:9200
+    volumes:
+    - "{{ nginx_conf_dir }}/:/etc/nginx/conf.d/:ro"
+    networks:
+    - name: "{{ network_name }}"
+    log_driver: "{{ log_driver }}"
+    log_options:
+      max-size: "{{ log_max_size }}"
+      max-file: "{{ log_max_file }}"
