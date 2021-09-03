@@ -1,6 +1,6 @@
 - name: Create elastic search volume
   docker_volume:
-    name: elasticsearch_volume
+    name: elastic_volume
     driver: local
 
 - name: Start elastic search container
@@ -15,7 +15,7 @@
       #xpack.security.enabled: "true"
       #xpack.monitoring.collection.enabled: "true"
     volumes:
-    - "./roles/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+    - "elastic_volume:/usr/share/elasticsearch/data"
     ports:
     - 9200:9200
     - 9300:9300

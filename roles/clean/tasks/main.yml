@@ -56,3 +56,16 @@
   - nginx
 
 
+- name: Remove heartbeat container
+  docker_container:
+    name: "{{ heartbeat_hostname }}"
+    state: absent
+  tags:
+  - heartbeat
+
+- name: Clean heartbeat conf dir
+  file:
+    state: absent
+    path: "{{ heartbeat_conf_dir }}"
+  tags:
+  - heartbeat
