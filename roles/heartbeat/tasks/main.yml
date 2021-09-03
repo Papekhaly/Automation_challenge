@@ -39,7 +39,7 @@
 - name: Wait for elasticsearch container
   pause:
     seconds: 10
-  when: not result.stat.exists
+  when: not result.exists
 
 - name: Load heartbeat template
   docker_container:
@@ -66,4 +66,4 @@
     log_options:
       max-size: "{{ log_max_size }}"
       max-file: "{{ log_max_file }}"
-  when: result.stat.exists
+  when: result.exists
