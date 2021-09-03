@@ -17,7 +17,7 @@ pipeline {
                 echo '> Deploying the application ...'
                 ansiblePlaybook(
                     vaultCredentialsId: 'AnsibleVault',
-                    inventory: '/inventory',
+                    inventory: 'inventory',
                     playbook: 'elk.yml'
                 )
             }
