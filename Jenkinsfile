@@ -1,21 +1,26 @@
-   
-    stages {
-        stage('GITHUB Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Papekhaly/Automation_challenge.git'
-            }
-        }
-        stage('Execute Ansible') {
-            steps {
-                ansiblePlaybook become: true, colorized: true, credentialsId: 'github', disableHostKeyChecking: true, installation: 'ansible', playbook: 'elk.yml'
-            }
-        }
-        stage('Notify sucess') {
-            steps{
-                echo("success")               
-            }
-        }
-    
+pipeline {
+    agent any
+ 
+    options {
+        skipDefaultCheckout(true)
     }
-
-
+ 
+    stages {
+        stage('Git') {
+            steps {
+                echo '> Checking out the Git version control ...'
+                checkout scm
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo '> Deploying the application ...'
+                ansiblePlaybook(
+                    vaultCredentialsId: 'AnsibleVault',
+                    inventory: '/inventory',
+                    playbook: 'elk.yml'
+                )
+            }
+        }
+    }
+}
