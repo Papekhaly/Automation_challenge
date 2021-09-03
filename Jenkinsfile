@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'build' }
+    
     stages {
         stage('GITLab Checkout') {
             steps {
