@@ -57,6 +57,7 @@
     delay: 5
     connect_timeout: 15
     timeout: 30
+  when: elasticsearch_hostname is defined and check_heartbeat_template.failed
  
 #- name: Wait for elasticsearch connection
 #  wait_for_connection:
