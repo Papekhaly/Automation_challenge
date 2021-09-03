@@ -41,31 +41,31 @@ services:
     image: jenkins/jenkins:lts
     privileged: true
     user: root
-    ports:
-      - 8080:8080
-      - 50000:50000
+   # ports:
+   #   - 8080:8080
+   #   - 50000:50000
     container_name: jenkins
     volumes:
-      - ~/jenkins:/var/jenkins_home
+      - ./jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins/"
     labels:
-      #front
       - "traefik.enable=true"
-      - "traefik.http.routers.jenkins.entrypoints=web-secured"
+      #- "traefik.http.routers.jenkins.service=jenkins"
       - "traefik.http.routers.jenkins.rule=PathPrefix(`/jenkins{regex:$$|/.*}`)"
-      - "traefik.http.routers.jenkins.middlewares=jenkins-prefix"
-      - "traefik.http.middlewares.jenkins-prefix.stripprefix.prefixes=/jenkins/"
-      - "traefik.http.routers.jenkins.service=jenkins"
       - "traefik.http.routers.jenkins.tls=true"
+      - "traefik.http.routers.jenkins.entrypoints=web-secured"
       - "traefik.http.routers.jenkins.tls.certresolver=mytlschallenge"
-      - "traefik.http.services.jenkins.loadbalancer.server.port=8080"
-      #back
-      - "traefik.http.routers.jenkins_back.entrypoints=web-secured"
+      #- "traefik.http.services.jenkins.loadbalancer.server.port=8080"
+
       - "traefik.http.routers.jenkins_back.tls=true"
+      - "traefik.http.routers.jenkins_back.entrypoints=web-secured"
       - "traefik.http.routers.jenkins_back.tls.certresolver=mytlschallenge"
-      - "traefik.http.services.jenkins_back.loadbalancer.server.port=50000"
-      - "traefik.http.routers.jenkins_back.service=jenkins_back"
+      #- "traefik.http.routers.jenkins_back.service=jenkins_back"
+      - "traefik.http.services.jenkins_back.loadbalancer.server.port=8080"
+
     networks:
       - mynet
 
