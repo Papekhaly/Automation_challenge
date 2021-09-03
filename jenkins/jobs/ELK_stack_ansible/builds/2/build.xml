@@ -165,15 +165,26 @@
         </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTPipelineDef>
       </pipelineDefs>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction>
+    <jenkins.model.InterruptedBuildAction>
+      <causes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+        <c class="list">
+          <jenkins.model.CauseOfInterruption_-UserInterruption>
+            <user>admin</user>
+          </jenkins.model.CauseOfInterruption_-UserInterruption>
+        </c>
+        <list reference="../c"/>
+      </causes>
+    </jenkins.model.InterruptedBuildAction>
   </actions>
   <queueId>2</queueId>
   <timestamp>1630684848003</timestamp>
   <startTime>1630684848036</startTime>
-  <duration>0</duration>
+  <result>ABORTED</result>
+  <duration>764073</duration>
   <charset>UTF-8</charset>
   <keepLog>false</keepLog>
   <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
-    <result>SUCCESS</result>
+    <result>ABORTED</result>
     <script>pipeline {
     agent { label &apos;build&apos; }
     stages {
@@ -202,15 +213,15 @@
     <timings class="map">
       <entry>
         <string>flowNode</string>
-        <long>41573921</long>
+        <long>147445381</long>
       </entry>
       <entry>
         <string>classLoad</string>
-        <long>12347647040</long>
+        <long>12412363758</long>
       </entry>
       <entry>
         <string>run</string>
-        <long>5887535671</long>
+        <long>6586556871</long>
       </entry>
       <entry>
         <string>parse</string>
@@ -218,16 +229,15 @@
       </entry>
       <entry>
         <string>saveProgram</string>
-        <long>318795729</long>
+        <long>324182100</long>
       </entry>
     </timings>
     <sandbox>true</sandbox>
-    <iota>3</iota>
-    <head>1:3</head>
-    <start>2</start>
-    <done>false</done>
+    <iota>5</iota>
+    <head>1:5</head>
+    <done>true</done>
     <resumeBlocked>false</resumeBlocked>
   </execution>
-  <completed>false</completed>
+  <completed>true</completed>
   <checkouts class="hudson.util.PersistedList"/>
 </flow-build>

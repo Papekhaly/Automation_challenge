@@ -6,7 +6,7 @@
   <usages/>
   <facets>
     <com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet plugin="credentials@2.5">
-      <timestamp>1630684848039</timestamp>
+      <timestamp>1630685616485</timestamp>
       <itemFullName>ELK_stack_ansible</itemFullName>
       <timestamp0>1630684848039</timestamp0>
     </com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet>
