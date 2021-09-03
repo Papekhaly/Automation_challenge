@@ -3,12 +3,17 @@
   <timestamp>2021-09-03 16:00:48.40 UTC</timestamp>
   <md5sum>7b6e723a15e0405e11b9f125b7831821</md5sum>
   <fileName>Credential id=github name=github repository</fileName>
-  <usages/>
+  <usages>
+    <entry>
+      <string>ELK_stack_ansible</string>
+      <ranges>6</ranges>
+    </entry>
+  </usages>
   <facets>
     <com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet plugin="credentials@2.5">
-      <timestamp>1630686354865</timestamp>
+      <timestamp>1630687017156</timestamp>
       <itemFullName>ELK_stack_ansible</itemFullName>
-      <timestamp0>1630686018815</timestamp0>
+      <timestamp0>1630686354865</timestamp0>
     </com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet>
   </facets>
 </fingerprint>

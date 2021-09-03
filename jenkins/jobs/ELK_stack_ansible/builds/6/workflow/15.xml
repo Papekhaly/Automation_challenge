@@ -1,0 +1,77 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.8">
+  <node class="cps.n.StepEndNode" plugin="workflow-cps@2.93">
+    <parentIds>
+      <string>14</string>
+    </parentIds>
+    <id>15</id>
+    <startId>12</startId>
+  </node>
+  <actions>
+    <wf.a.BodyInvocationAction plugin="workflow-api@2.46"/>
+    <wf.a.TimingAction plugin="workflow-api@2.46">
+      <startTime>1630687065649</startTime>
+    </wf.a.TimingAction>
+    <wf.a.ErrorAction plugin="workflow-api@2.46">
+      <error class="java.io.IOException">
+        <detailMessage>Cannot run program &quot;ansible-playbook&quot; (in directory &quot;/var/jenkins_home/workspace/ELK_stack_ansible&quot;): error=2, No such file or directory</detailMessage>
+        <cause class="java.io.IOException">
+          <detailMessage>error=2, No such file or directory</detailMessage>
+          <stackTrace>
+            <trace>java.base/java.lang.ProcessImpl.forkAndExec(Native Method)</trace>
+            <trace>java.base/java.lang.ProcessImpl.&lt;init&gt;(ProcessImpl.java:340)</trace>
+            <trace>java.base/java.lang.ProcessImpl.start(ProcessImpl.java:271)</trace>
+            <trace>java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1107)</trace>
+            <trace>java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1071)</trace>
+            <trace>hudson.Proc$LocalProc.&lt;init&gt;(Proc.java:253)</trace>
+            <trace>hudson.Proc$LocalProc.&lt;init&gt;(Proc.java:222)</trace>
+            <trace>hudson.Launcher$LocalLauncher.launch(Launcher.java:996)</trace>
+            <trace>hudson.Launcher$ProcStarter.start(Launcher.java:508)</trace>
+            <trace>hudson.Launcher$ProcStarter.join(Launcher.java:519)</trace>
+            <trace>org.jenkinsci.plugins.ansible.CLIRunner.execute(CLIRunner.java:49)</trace>
+            <trace>org.jenkinsci.plugins.ansible.AbstractAnsibleInvocation.execute(AbstractAnsibleInvocation.java:290)</trace>
+            <trace>org.jenkinsci.plugins.ansible.AnsiblePlaybookInvocation.execute(AnsiblePlaybookInvocation.java:31)</trace>
+            <trace>org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder.perform(AnsiblePlaybookBuilder.java:261)</trace>
+            <trace>org.jenkinsci.plugins.ansible.workflow.AnsiblePlaybookStep$AnsiblePlaybookExecution.run(AnsiblePlaybookStep.java:430)</trace>
+            <trace>org.jenkinsci.plugins.ansible.workflow.AnsiblePlaybookStep$AnsiblePlaybookExecution.run(AnsiblePlaybookStep.java:351)</trace>
+            <trace>org.jenkinsci.plugins.workflow.steps.AbstractSynchronousNonBlockingStepExecution$1$1.call(AbstractSynchronousNonBlockingStepExecution.java:47)</trace>
+            <trace>hudson.security.ACL.impersonate2(ACL.java:449)</trace>
+            <trace>hudson.security.ACL.impersonate(ACL.java:461)</trace>
+            <trace>org.jenkinsci.plugins.workflow.steps.AbstractSynchronousNonBlockingStepExecution$1.run(AbstractSynchronousNonBlockingStepExecution.java:44)</trace>
+            <trace>java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)</trace>
+            <trace>java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</trace>
+            <trace>java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)</trace>
+            <trace>java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)</trace>
+            <trace>java.base/java.lang.Thread.run(Thread.java:829)</trace>
+          </stackTrace>
+          <suppressedExceptions class="empty-list"/>
+        </cause>
+        <stackTrace>
+          <trace>java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1128)</trace>
+          <trace>java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1071)</trace>
+          <trace>hudson.Proc$LocalProc.&lt;init&gt;(Proc.java:253)</trace>
+          <trace>hudson.Proc$LocalProc.&lt;init&gt;(Proc.java:222)</trace>
+          <trace>hudson.Launcher$LocalLauncher.launch(Launcher.java:996)</trace>
+          <trace>hudson.Launcher$ProcStarter.start(Launcher.java:508)</trace>
+          <trace>hudson.Launcher$ProcStarter.join(Launcher.java:519)</trace>
+          <trace>org.jenkinsci.plugins.ansible.CLIRunner.execute(CLIRunner.java:49)</trace>
+          <trace>org.jenkinsci.plugins.ansible.AbstractAnsibleInvocation.execute(AbstractAnsibleInvocation.java:290)</trace>
+          <trace>org.jenkinsci.plugins.ansible.AnsiblePlaybookInvocation.execute(AnsiblePlaybookInvocation.java:31)</trace>
+          <trace>org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder.perform(AnsiblePlaybookBuilder.java:261)</trace>
+          <trace>org.jenkinsci.plugins.ansible.workflow.AnsiblePlaybookStep$AnsiblePlaybookExecution.run(AnsiblePlaybookStep.java:430)</trace>
+          <trace>org.jenkinsci.plugins.ansible.workflow.AnsiblePlaybookStep$AnsiblePlaybookExecution.run(AnsiblePlaybookStep.java:351)</trace>
+          <trace>org.jenkinsci.plugins.workflow.steps.AbstractSynchronousNonBlockingStepExecution$1$1.call(AbstractSynchronousNonBlockingStepExecution.java:47)</trace>
+          <trace>hudson.security.ACL.impersonate2(ACL.java:449)</trace>
+          <trace>hudson.security.ACL.impersonate(ACL.java:461)</trace>
+          <trace>org.jenkinsci.plugins.workflow.steps.AbstractSynchronousNonBlockingStepExecution$1.run(AbstractSynchronousNonBlockingStepExecution.java:44)</trace>
+          <trace>java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)</trace>
+          <trace>java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</trace>
+          <trace>java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)</trace>
+          <trace>java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)</trace>
+          <trace>java.base/java.lang.Thread.run(Thread.java:829)</trace>
+        </stackTrace>
+        <suppressedExceptions class="empty-list"/>
+      </error>
+    </wf.a.ErrorAction>
+  </actions>
+</Tag>

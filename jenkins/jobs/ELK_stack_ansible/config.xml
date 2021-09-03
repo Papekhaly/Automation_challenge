@@ -6,7 +6,9 @@
       <jobProperties/>
       <triggers/>
       <parameters/>
-      <options/>
+      <options>
+        <string>skipDefaultCheckout</string>
+      </options>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
   <description></description>
