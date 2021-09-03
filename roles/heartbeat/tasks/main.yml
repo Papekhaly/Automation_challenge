@@ -60,7 +60,7 @@
     name: "{{ heartbeat_hostname }}"
     image: "{{ heartbeat_image }}"
     volumes:
-    - "{{ heartbeat_conf_dir }}/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro"
+    - "{{ heartbeat_conf_dir }}/:/usr/share/heartbeat/heartbeat.yml:ro"
     networks:
     - name: "{{ network_name }}"
     log_driver: "{{ log_driver }}"
