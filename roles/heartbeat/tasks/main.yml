@@ -1,7 +1,4 @@
----
- name: Wait 1minutes for target connection to become reachable/usable
-  wait_for_connection:
-    timeout: 60
+--- 
 
 - name: Create heartbeat search volume
   docker_volume:
@@ -51,7 +48,7 @@
     networks:
     - name: "{{ network_name }}"
   ignore_errors: yes
-  when: elasticsearch_hostname is defined and check_heartbeat_template.failed
+  #when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
 - name: wait for elastic to become ready
   wait_for:
