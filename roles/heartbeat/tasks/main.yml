@@ -36,7 +36,6 @@
     name: "{{ elasticsearch_hostname }}"
   register: result
 
-
 - name: Load heartbeat template
   docker_container:
     name: "{{ heartbeat_hostname }}-run"
@@ -48,10 +47,20 @@
       -E 'output.elasticsearch.username="elastic"' -E 'output.elasticsearch.password="{{ elastic_password }}"'
     networks:
     - name: "{{ network_name }}"
- 
-- name: Wait for elasticsearch connection
-  wait_for_connection:
   when: elasticsearch_hostname is defined and check_heartbeat_template.failed
+
+- name: wait for elastic to become ready
+  wait_for:
+    host: "{{ elasticsearch_hostname }}"
+    port: 9200
+    state: started
+    delay: 5
+    connect_timeout: 15
+    timeout: 30
+ 
+#- name: Wait for elasticsearch connection
+#  wait_for_connection:
+ # when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
 - name: Start heartbeat container
   docker_container:

@@ -12,9 +12,9 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Deploy') {
+        stage('Deploy ELK stack') {
             steps {
-                echo '> Deploying the application ...'
+                echo '> Deploying ELK stack ...'
                 ansiblePlaybook(
                     vaultCredentialsId: 'AnsibleVault',
                     inventory: 'inventory',
@@ -22,5 +22,17 @@ pipeline {
                 )
             }
         }
+        stage('Deploy heartbeat') {
+            steps {
+                echo '> Deploying heartbeat ...'
+                ansiblePlaybook(
+                    vaultCredentialsId: 'AnsibleVault',
+                    inventory: 'inventory',
+                    playbook: 'elk-heartbeat.yml'
+                )
+            }
+        }
+     
     }
+
 }
