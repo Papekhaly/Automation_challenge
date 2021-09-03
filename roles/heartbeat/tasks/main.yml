@@ -36,10 +36,6 @@
     name: "{{ elasticsearch_hostname }}"
   register: result
 
-- name: Wait for elasticsearch container
-  pause:
-    seconds: 10
-  when: not result.exists
 
 - name: Load heartbeat template
   docker_container:
@@ -52,6 +48,9 @@
       -E 'output.elasticsearch.username="elastic"' -E 'output.elasticsearch.password="{{ elastic_password }}"'
     networks:
     - name: "{{ network_name }}"
+ 
+- name: Wait for elasticsearch connection
+  wait_for_connection:
   when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
 - name: Start heartbeat container
@@ -66,4 +65,4 @@
     log_options:
       max-size: "{{ log_max_size }}"
       max-file: "{{ log_max_file }}"
-  when: result.exists
+  
