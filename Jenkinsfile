@@ -1,7 +1,6 @@
-pipeline {
-    
+   
     stages {
-        stage('GITLab Checkout') {
+        stage('GITHUB Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Papekhaly/Automation_challenge.git'
             }
@@ -19,4 +18,4 @@ pipeline {
     
     }
 
-}
+
