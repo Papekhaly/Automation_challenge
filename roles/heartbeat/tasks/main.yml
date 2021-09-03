@@ -26,7 +26,7 @@
 
 - name: Get infos on container
   docker_container_info:
-    name: {{ elasticsearch_hostname }}
+    name: "{{ elasticsearch_hostname }}"
   register: result
 
 
