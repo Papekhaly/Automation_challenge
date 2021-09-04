@@ -10,4 +10,4 @@ def test_docker(host):
 def test_release_file(host):
     release_file = host.file("/etc/os-release")
     assert release_file.contains('Debian')
-    assert release_file.contains('9 (stretch)')
+    assert release_file.contains('11 (bullseye)')
