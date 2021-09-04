@@ -2,10 +2,10 @@ import os
 import testinfra.utils.ansible_runner
 import pytest
 
-def test_docker(host):
-  daemon = host.service("docker")
-  assert daemon.is_running
-  assert daemon.is_enabled
+#def test_docker(host):
+#  daemon = host.service("docker")
+#  assert daemon.is_running
+#  assert daemon.is_enabled
 
 def test_release_file(host):
     release_file = host.file("/etc/os-release")
