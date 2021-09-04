@@ -22,6 +22,12 @@ pipeline {
                 )
             }
         }
+        stage('Test elasticsearch connection'){
+           steps {
+               echo '> Test elastic container connection...'
+               sh 'tests/test_elasticsearch.py'
+               }
+        }
         stage('Deploy heartbeat') {
             steps {
                 echo '> Deploying heartbeat ...'
