@@ -5,9 +5,6 @@ import pytest
 from types import GeneratorType
 
 
-def test_all_the_pings(host):
-    host().all.ping()
-
 def test_docker(host):
   daemon = host.service("docker")
   assert daemon.is_running

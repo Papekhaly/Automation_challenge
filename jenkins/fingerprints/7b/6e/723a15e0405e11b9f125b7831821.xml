@@ -11,9 +11,9 @@
   </usages>
   <facets>
     <com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet plugin="credentials@2.5">
-      <timestamp>1630794700926</timestamp>
+      <timestamp>1630794965951</timestamp>
       <itemFullName>ELK_stack_ansible</itemFullName>
-      <timestamp0>1630785549618</timestamp0>
+      <timestamp0>1630794700926</timestamp0>
     </com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet>
   </facets>
 </fingerprint>
