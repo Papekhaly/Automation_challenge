@@ -1,2 +1,11 @@
-get_host("local://", sudo=True)
-get_host("ansible://all?ansible_inventory=/etc/ansible/inventory")
+import unittest
+import testinfra
+
+
+class Test(unittest.TestCase):
+
+    def setUp(self):
+        self.host = testinfra.get_host("http://localhost")
+
+if __name__ == "__main__":
+    unittest.main()
