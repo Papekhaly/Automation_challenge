@@ -1,11 +1,19 @@
-import unittest
-import testinfra
+import os
+import testinfra.utils.ansible_runner
+import pytest
+
+from types import GeneratorType
 
 
-class Test(unittest.TestCase):
+def test_all_the_pings(host):
+    host().all.ping()
 
-    def setUp(self):
-        self.host = testinfra.get_host("http://localhost")
+def test_docker(host):
+  daemon = host.service("docker")
+  assert daemon.is_running
+  assert daemon.is_enabled
 
-if __name__ == "__main__":
-    unittest.main()
+def test_release_file(host):
+    release_file = host.file("/etc/os-release")
+    assert release_file.contains('Debian')
+    assert release_file.contains('9 (stretch)')
