@@ -6,18 +6,19 @@ pipeline {
     }
  
     stages {
-        stage('test ansible node'){
-           steps {
-               echo '> Checking ansible node version ...'
-               sh 'py.test -v tests/host_test.py'
-           }
-        }
         stage('Git') {
             steps {
                 echo '> Checking out the Git version control ...'
                 checkout scm
             }
         }
+        stage('test ansible node'){
+           steps {
+               echo '> Checking ansible node version ...'
+               sh 'py.test -v tests/host_test.py'
+           }
+        }
+        
         stage('Deploy ELK stack') {
             steps {
                 echo '> Deploying ELK stack ...'
