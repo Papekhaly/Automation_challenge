@@ -2,9 +2,6 @@ import os
 import testinfra.utils.ansible_runner
 import pytest
 
-from types import GeneratorType
-
-
 def test_docker(host):
   daemon = host.service("docker")
   assert daemon.is_running
