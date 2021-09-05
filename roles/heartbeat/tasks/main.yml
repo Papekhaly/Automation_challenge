@@ -44,7 +44,7 @@
     networks:
     - name: "{{ network_name }}"
   ignore_errors: yes
-  #when: elasticsearch_hostname is defined and check_heartbeat_template.failed
+  when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
 - name: wait for heartbeat to connect elastic
   wait_for:
@@ -53,7 +53,7 @@
     state: started
     delay: 5
     connect_timeout: 15
-    timeout: 300
+    timeout: 30
   when: elasticsearch_hostname is defined and check_heartbeat_template.failed
  
 - name: Start heartbeat container

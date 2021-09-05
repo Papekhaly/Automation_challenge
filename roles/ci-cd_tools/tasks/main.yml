@@ -1,0 +1,77 @@
+- name: Start HAproxy container
+  docker_container:
+    name: "{{ haproxy_hostname }}"
+    image: "{{ haproxy_image }}"
+    command: 
+    - --api.insecure=true 
+    - --api.dashboard=true 
+    - --api.debug=true 
+    - --log.level=DEBUG 
+    - --providers.docker=true 
+    - --providers.docker.exposedbydefault=false 
+    - --providers.docker.network=mynet 
+    - --entrypoints.web-secured.address=:443 
+    - --certificatesresolvers.mytlschallenge.acme.tlschallenge=true 
+    - --certificatesresolvers.mytlschallenge.acme.email=theafkdeveloper@gmail.com 
+    - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json 
+    - --certificatesresolvers.mytlschallenge.acme.caserver=https://acme-v02.api.letsencrypt.org/directory  
+    volumes: 
+    - "./letsencrypt:/letsencrypt" # <== Volume for certs (TLS)
+    - "/var/run/docker.sock:/var/run/docker.sock" # <== Volume for docker admin
+    ports:
+    - 443:443
+  
+    networks:
+    - name: "{{ network_name }}"
+    labels:
+       traefik.enable: "true" 
+       traefik.http.routers.api.rule: "Host(`devops-server21.ddns.net`)" 
+       traefik.http.routers.api.service: "api@internal" 
+       traefik.http.routers.api.entrypoints: "web-secured"
+       traefik.http.routers.api.tls: "true"
+       traefik.http.routers.api.tls.certresolver: "mytlschallenge" 
+       traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https" 
+       traefik.http.routers.api.middlewares: "redirect-to-https"
+              
+  
+- name: build the image
+  docker_image:
+    name: jenkins_built
+    build:
+       path: ./
+    source: build
+
+- name: Start jenkins container
+  docker_container:
+    name: "{{ jenkins_hostname }}"
+    image: "jenkins_built"       
+    user: "root"
+    privileged: "true"
+    volumes:
+    - "./jenkins:/var/jenkins_home"
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "/usr/local/bin/docker:/usr/local/bin/docker"
+    ports:
+    - 8080:8080
+    - 50000:50000
+    env:
+       JENKINS_OPTS: "--prefix=/jenkins/"
+    
+    labels:
+       traefik.enable: "true"
+       #- "traefik.http.routers.jenkins.service=jenkins"
+       traefik.http.routers.jenkins.rule: "PathPrefix(`/jenkins{regex:$$|/.*}`)"
+       traefik.http.routers.jenkins.tls: "true"
+       traefik.http.routers.jenkins.entrypoints: "web-secured"
+       traefik.http.routers.jenkins.tls.certresolver: "mytlschallenge"
+       #- "traefik.http.services.jenkins.loadbalancer.server.port=8080"
+
+       traefik.http.routers.jenkins_back.tls: "true"
+       traefik.http.routers.jenkins_back.entrypoints: "web-secured"
+       traefik.http.routers.jenkins_back.tls.certresolver: "mytlschallenge"
+       #- "traefik.http.routers.jenkins_back.service=jenkins_back"
+       traefik.http.services.jenkins_back.loadbalancer.server.port: "8080"
+       traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
+       traefik.http.routers.jenkins.middlewares: "redirect-to-https"
+      
+   

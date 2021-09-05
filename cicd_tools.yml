@@ -1,0 +1,5 @@
+- hosts: "{{ ehosts | default('local') }}"
+  become: true
+  roles:
+  - { role: docker, tags: ["docker"] }
+  - { role: ci-cd_tools, tags: ["ci-cd_tools"] }

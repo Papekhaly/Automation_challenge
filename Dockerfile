@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y python3.9
 # Set python3.9 as the default python
 #RUN update-alternatives --set python /usr/bin/python3.9
 
+ENV JENKINS_OPTS --prefix=/jenkins/ 
 
 #install requirement
 RUN apt install python3-pip -y
