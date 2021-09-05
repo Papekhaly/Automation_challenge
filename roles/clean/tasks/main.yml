@@ -41,6 +41,7 @@
   tags:
   - nginx
 
+
 #- name: Remove certbot container
 #  docker_container:
 #    name: "{{ certbot_hostname }}"
@@ -69,3 +70,25 @@
     path: "{{ heartbeat_conf_dir }}"
   tags:
   - heartbeat
+
+
+- name: Remove haproxy container
+  docker_container:
+    name: "{{ haproxy_hostname }}"
+    state: absent
+  tags:
+  - ci-cd_tools
+
+- name: Remove jenkins container
+  docker_container:
+    name: "{{ jenkins_hostname }}"
+    state: absent
+  tags:
+  - ci-cd_tools
+
+- name: Remove jenkins build image
+  docker_image:
+    name: "jenkins_built"
+    state: absent
+  tags:
+  - ci-cd_tools
