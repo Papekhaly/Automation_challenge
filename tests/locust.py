@@ -1,12 +1,12 @@
-from locust import HttpLocust, TaskSet, task, SequentialTaskSet
+import json
+import time
+from locust import HttpUser, task, between
 
-class MyTasks(TaskSet):
-    #when locust file start executing on_start() will be called first
-    def on_start(self):
-        self.client.get("/")
+class QuickstartUser(HttpUser):
+    wait_time = between(1, 2.5)
 
-class MyWebsiteUser(HttpUser):
-    task_set= MyTasks
-    min_wait=100 #miliseconds
-    max_wait=5000 #miliseconds
-    # same as wait_time = between(0.100, 5) 
+    @task
+    def elastic_search_login(self):
+        self.client.post("/", json={"username":"test", "password":"test"})
+    
+
