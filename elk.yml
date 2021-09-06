@@ -4,5 +4,5 @@
   roles:
   - { role: elasticsearch, tags: ["elasticsearch"] }
   - { role: kibana, tags: ["kibana"] }
-  - { role: logstash, tags: ["logstash"] }
-
+  - { role: logstash, tags: ["logstash"] } 
+  - { role: heartbeat, tags: ["heartbeat"] }
