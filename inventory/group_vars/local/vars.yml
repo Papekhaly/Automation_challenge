@@ -2,7 +2,7 @@ server_name: localhost
 network_name: mynet
 
 traefik_image: traefik:v2.0
-traefik_hostname: traefik
+traefik_hostname: traefikv2
 #traefik_conf_dir: /urs/share/traefik
 
 jenkins_hostname: jenkins
@@ -33,10 +33,6 @@ heartbeat_urls:
 - https://example.com
 - https://status.example.com
 
-#certbot_image: certbot/certbot
-#certbot_hostname: certbot01
-#certbot_conf_dir: /home/Airbus_automation/roles/nginx/files
-#certbot_email: info@example.com
 
 elastic_password: "{{ vault_elastic_password }}"
 kibana_password: "{{ vault_kibana_password }}"

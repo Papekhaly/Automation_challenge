@@ -73,14 +73,14 @@
 
 
 - name: Remove sonarqube container
-  docker_image:
+  docker_container:
     name: "{{ sonar_hostname }}"
     state: absent
   tags:
   - sonarqube
 
-- name: Remove postrgres container
-  docker_image:
+- name: Remove postgres container
+  docker_container:
     name: "{{ db_hostname }}"
     state: absent
   tags:
