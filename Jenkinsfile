@@ -27,6 +27,8 @@ pipeline {
                   withSonarQubeEnv('sonarqube') {
                       sh "${scannerHome}/bin/sonar-scanner"
                   }
+           
+
              }
         } 
         stage('Deploy ELK stack') {
