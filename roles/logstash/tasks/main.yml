@@ -30,7 +30,7 @@
     - 5000:5000
     - 5044:5044
     volumes:
-    - "/roles/logstash/config/:/usr/share/logstash/config/"
+   # - "/roles/logstash/config/:/usr/share/logstash/config/"
     - "{{ logstash_conf_dir }}/pipeline:/usr/share/logstash/pipeline:ro"
     networks:
     - name: "{{ network_name }}"
