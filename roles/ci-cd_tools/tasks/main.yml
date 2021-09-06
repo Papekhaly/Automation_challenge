@@ -1,33 +1,33 @@
-- name: Create sonar volume
-  docker_volume:
-    name: sonarqube_data
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: sonarqube_data
+#    driver: local
 
-- name: Create sonar volume
-  docker_volume:
-    name: sonarqube_extensions
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: sonarqube_extensions
+#    driver: local
 
-- name: Create sonar volume
-  docker_volume:
-    name: sonarqube_logs
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: sonarqube_logs
+#    driver: local
 
-- name: Create sonar volume
-  docker_volume:
-    name: sonarqube_temp
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: sonarqube_temp
+#    driver: local
 
-- name: Create sonar volume
-  docker_volume:
-    name: postgresql
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: postgresql
+#    driver: local
 
 
-- name: Create sonar volume
-  docker_volume:
-    name: postgresql_data
-    driver: local
+#- name: Create sonar volume
+#  docker_volume:
+#    name: postgresql_data
+#    driver: local
 
 - name: Start traefik container
   docker_container:
@@ -49,14 +49,15 @@
     volumes: 
     - "./letsencrypt:/letsencrypt" # <== Volume for certs (TLS)
     - "/var/run/docker.sock:/var/run/docker.sock" # <== Volume for docker admin
+    - "./dynamic.yaml:/dynamic.yaml"
     ports:
     - 443:443
-  
+    - 8081:8081
     networks:
     - name: "{{ network_name }}"
     labels:
        traefik.enable: "true" 
-       traefik.http.routers.api.rule: "Host(`devops-server21.ddns.net`)" 
+       traefik.http.routers.api.rule: "Host(`devops-srv01.ddns.net`)" 
        traefik.http.routers.api.service: "api@internal" 
        traefik.http.routers.api.entrypoints: "web-secured"
        traefik.http.routers.api.tls: "true"
@@ -88,24 +89,37 @@
         
     labels:
        traefik.enable: "true"
-       #- "traefik.http.routers.jenkins.service=jenkins"
        traefik.http.routers.jenkins.rule: "PathPrefix(`/jenkins{regex:$$|/.*}`)"
        traefik.http.routers.jenkins.tls: "true"
        traefik.http.routers.jenkins.entrypoints: "web-secured"
        traefik.http.routers.jenkins.tls.certresolver: "mytlschallenge"
-       #- "traefik.http.services.jenkins.loadbalancer.server.port=8080"
+       
 
        traefik.http.routers.jenkins_back.tls: "true"
        traefik.http.routers.jenkins_back.entrypoints: "web-secured"
        traefik.http.routers.jenkins_back.tls.certresolver: "mytlschallenge"
-       #- "traefik.http.routers.jenkins_back.service=jenkins_back"
        traefik.http.services.jenkins_back.loadbalancer.server.port: "8080"
-       #traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
-       #traefik.http.routers.jenkins.middlewares: "redirect-to-https"
+       traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
+       traefik.http.routers.jenkins.middlewares: "redirect-to-https"
       
    
     networks:
     - name: "{{ network_name }}"
+
+
+- name: Start Sonarqube db container
+  docker_container:
+    name: "{{ db_hostname }}"
+    image: "{{ db_image }}"
+    volumes:
+    - "postgresql:/var/lib/postgresql"
+    - "postgresql_data:/var/lib/postgresql/data"
+    env:
+       POSTGRES_USER: "sonar"
+       POSTGRES_PASSWORD: "sonar"
+    networks:
+    - name: "{{ network_name }}"
+
 
 - name: Start sonarqube container
   docker_container:
@@ -127,16 +141,5 @@
     networks:
     - name: "{{ network_name }}"
 
-- name: Start Sonarqube db container
-  docker_container:
-    name: "{{ db_hostname }}"
-    image: "{{ db_image }}"
-    volumes:
-    - "postgresql:/var/lib/postgresql"
-    - "postgresql_data:/var/lib/postgresql/data"
-    env:
-       POSTGRES_USER: "sonar"
-       POSTGRES_PASSWORD: "sonar"
-    networks:
-    - name: "{{ network_name }}"
-    
+
+
