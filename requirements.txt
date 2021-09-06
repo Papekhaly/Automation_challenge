@@ -2,3 +2,4 @@ docker
 requests
 pytest-testinfra
 webtest
+locust
