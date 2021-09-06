@@ -34,28 +34,6 @@
   tags:
   - logstash
 
-- name: Remove nginx container
-  docker_container:
-    name: "{{ nginx_hostname }}"
-    state: absent
-  tags:
-  - nginx
-
-
-#- name: Remove certbot container
-#  docker_container:
-#    name: "{{ certbot_hostname }}"
-#    state: absent
-#  tags:
-#  - nginx
-
-- name: Clean nginx conf dir
-  file:
-    state: absent
-    path: "{{ nginx_conf_dir }}"
-  tags:
-  - nginx
-
 
 - name: Remove heartbeat container
   docker_container:
@@ -72,23 +50,39 @@
   - heartbeat
 
 
-- name: Remove haproxy container
+- name: Remove traefik container
   docker_container:
-    name: "{{ haproxy_hostname }}"
+    name: "{{ traefik_hostname }}"
     state: absent
   tags:
-  - ci-cd_tools
+  - traefik
 
 - name: Remove jenkins container
   docker_container:
     name: "{{ jenkins_hostname }}"
     state: absent
   tags:
-  - ci-cd_tools
+  - jenkins
 
 - name: Remove jenkins build image
   docker_image:
     name: "jenkins_built"
     state: absent
   tags:
-  - ci-cd_tools
+  - jenkins_image
+
+
+- name: Remove sonarqube container
+  docker_image:
+    name: "{{ sonar_hostname }}"
+    state: absent
+  tags:
+  - sonarqube
+
+- name: Remove postrgres container
+  docker_image:
+    name: "{{ db_hostname }}"
+    state: absent
+  tags:
+  - postgresql
+

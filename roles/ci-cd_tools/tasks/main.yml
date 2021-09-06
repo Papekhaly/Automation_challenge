@@ -1,7 +1,38 @@
-- name: Start HAproxy container
+- name: Create sonar volume
+  docker_volume:
+    name: sonarqube_data
+    driver: local
+
+- name: Create sonar volume
+  docker_volume:
+    name: sonarqube_extensions
+    driver: local
+
+- name: Create sonar volume
+  docker_volume:
+    name: sonarqube_logs
+    driver: local
+
+- name: Create sonar volume
+  docker_volume:
+    name: sonarqube_temp
+    driver: local
+
+- name: Create sonar volume
+  docker_volume:
+    name: postgresql
+    driver: local
+
+
+- name: Create sonar volume
+  docker_volume:
+    name: postgresql_data
+    driver: local
+
+- name: Start traefik container
   docker_container:
-    name: "{{ haproxy_hostname }}"
-    image: "{{ haproxy_image }}"
+    name: "{{ traefik_hostname }}"
+    image: "{{ traefik_image }}"
     command: 
     - --api.insecure=true 
     - --api.dashboard=true 
@@ -51,12 +82,10 @@
     - "./jenkins:/var/jenkins_home"
     - "/var/run/docker.sock:/var/run/docker.sock"
     - "/usr/local/bin/docker:/usr/local/bin/docker"
-    ports:
-    - 8080:8080
-    - 50000:50000
-    env:
-       JENKINS_OPTS: "--prefix=/jenkins/"
-    
+    #ports:
+    #- 8080:8080
+    #- 50000:50000
+        
     labels:
        traefik.enable: "true"
        #- "traefik.http.routers.jenkins.service=jenkins"
@@ -71,7 +100,43 @@
        traefik.http.routers.jenkins_back.tls.certresolver: "mytlschallenge"
        #- "traefik.http.routers.jenkins_back.service=jenkins_back"
        traefik.http.services.jenkins_back.loadbalancer.server.port: "8080"
-       traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
-       traefik.http.routers.jenkins.middlewares: "redirect-to-https"
+       #traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: "https"
+       #traefik.http.routers.jenkins.middlewares: "redirect-to-https"
       
    
+    networks:
+    - name: "{{ network_name }}"
+
+- name: Start sonarqube container
+  docker_container:
+    name: "{{ sonar_hostname }}"
+    image: "{{ sonar_image }}"
+    volumes:
+    - "sonarqube_data:/opt/sonarqube/data"
+    - "sonarqube_extensions:/opt/sonarqube/extensions"
+    - "sonarqube_logs:/opt/sonarqube/logs"
+    - "sonarqube_temp:/opt/sonarqube/temp"
+    ports:
+    - 9000:9000
+    links:
+    - postgresql:{{ db_hostname }}
+    env:
+       SONAR_JDBC_URL: "jdbc:postgresql://{{db_hostname}}:5432/sonar"
+       SONAR_JDBC_USERNAME: "sonar"
+       SONAR_JDBC_PASSWORD: "sonar"
+    networks:
+    - name: "{{ network_name }}"
+
+- name: Start Sonarqube db container
+  docker_container:
+    name: "{{ db_hostname }}"
+    image: "{{ db_image }}"
+    volumes:
+    - "postgresql:/var/lib/postgresql"
+    - "postgresql_data:/var/lib/postgresql/data"
+    env:
+       POSTGRES_USER: "sonar"
+       POSTGRES_PASSWORD: "sonar"
+    networks:
+    - name: "{{ network_name }}"
+    
