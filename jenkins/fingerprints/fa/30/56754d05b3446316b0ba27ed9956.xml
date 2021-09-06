@@ -6,14 +6,14 @@
   <usages>
     <entry>
       <string>ELK_stack_Ansible</string>
-      <ranges>1-5</ranges>
+      <ranges>1-6</ranges>
     </entry>
   </usages>
   <facets>
     <com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet plugin="credentials@2.5">
-      <timestamp>1630937094254</timestamp>
+      <timestamp>1630938141517</timestamp>
       <itemFullName>ELK_stack_Ansible</itemFullName>
-      <timestamp0>1630935895844</timestamp0>
+      <timestamp0>1630937094254</timestamp0>
     </com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet>
   </facets>
 </fingerprint>

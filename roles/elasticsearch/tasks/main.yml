@@ -12,8 +12,8 @@
       discovery.type: "single-node"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       ELASTIC_PASSWORD: "{{ elastic_password }}"
-      #xpack.security.enabled: "true"
-      #xpack.monitoring.collection.enabled: "true"
+      xpack.security.enabled: "true"
+      xpack.monitoring.collection.enabled: "true"
     volumes:
     - "elastic_volume:/usr/share/elasticsearch/data"
     ports:

@@ -47,16 +47,8 @@ pipeline {
                sh 'py.test -v tests/test_elasticsearch.py'
                }
         }
-        stage('Deploy heartbeat') {
-            steps {
-                echo '> Deploying heartbeat ...'
-                ansiblePlaybook(
-                    vaultCredentialsId: 'AnsibleVault',
-                    inventory: 'inventory',
-                    playbook: 'elk-heartbeat.yml'
-                )
-            }
-        }
+        
+        
      
     }
 

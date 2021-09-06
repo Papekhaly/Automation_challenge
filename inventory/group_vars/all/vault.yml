@@ -1,21 +1,22 @@
-vault_elastic_password: hwOIDvwOXitkBeJPXsR7
-vault_kibana_password: 5ProIlQCcyLEZA8WBSXM
+vault_elastic_password: axrPoo1vLmL0X59Keyf1
+vault_kibana_password: H6XERGxomoSvgYl21QS6
 
 #Changed password for user apm_system
-#PASSWORD apm_system = xN6eWtGGohvHfHIATWYD
+#PASSWORD apm_system = LhwvJaOoV14Epc5fem22
 
 #Changed password for user kibana
-#PASSWORD kibana = 5ProIlQCcyLEZA8WBSXM
+#PASSWORD kibana = H6XERGxomoSvgYl21QS6
 
 #Changed password for user logstash_system
-#PASSWORD logstash_system = 9JYrpN9PD8TS8Dwz7W2L
+#PASSWORD logstash_system = DexMzhSV4QCQDcrzfDRP
 
 #Changed password for user beats_system
-#PASSWORD beats_system = ht38X6U8lUQRycZjHVFs
+#PASSWORD beats_system = H5dC2IiuAdPVex4aadRf
 
 #Changed password for user remote_monitoring_user
-#PASSWORD remote_monitoring_user = FSi2GjAneHUPDOxvLt0N
+#PASSWORD remote_monitoring_user = vcGp7JvBa1iCIEGR3P5k
 
 #Changed password for user elastic
-#PASSWORD elastic = hwOIDvwOXitkBeJPXsR7
+#PASSWORD elastic = axrPoo1vLmL0X59Keyf1
+
 

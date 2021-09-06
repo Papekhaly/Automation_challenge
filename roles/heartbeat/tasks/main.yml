@@ -43,19 +43,10 @@
       -E 'output.elasticsearch.username="elastic"' -E 'output.elasticsearch.password="{{ elastic_password }}"'
     networks:
     - name: "{{ network_name }}"
-  ignore_errors: yes
+  #ignore_errors: yes
   when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
-- name: wait for heartbeat to connect elastic
-  wait_for:
-    host: "{{ elasticsearch_hostname }}"
-    port: 9200
-    state: started
-    delay: 5
-    connect_timeout: 15
-    timeout: 30
-  #when: elasticsearch_hostname is defined and check_heartbeat_template.failed
- 
+
 - name: Start heartbeat container
   docker_container:
     name: "{{ heartbeat_hostname }}"
