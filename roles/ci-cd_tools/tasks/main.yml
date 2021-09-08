@@ -1,37 +1,3 @@
-<<<<<<< HEAD
-=======
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_data
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_extensions
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_logs
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_temp
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: postgresql
-#    driver: local
-
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: postgresql_data
-#    driver: local
-
->>>>>>> dbefdc3c5c3c46a2aafd307d5987748b575a08b5
 - name: Start traefik container
   docker_container:
     name: "{{ traefik_hostname }}"
@@ -50,9 +16,9 @@
     - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json 
     - --certificatesresolvers.mytlschallenge.acme.caserver=https://acme-v02.api.letsencrypt.org/directory  
     volumes: 
-    - "./letsencrypt:/letsencrypt" # <== Volume for certs (TLS)
+    - "/usr/share/letsencrypt:/letsencrypt" # <== Volume for certs (TLS)
     - "/var/run/docker.sock:/var/run/docker.sock" # <== Volume for docker admin
-    - "./dynamic.yaml:/dynamic.yaml"
+    #- "./dynamic.yaml:/dynamic.yaml"
     ports:
     - 443:443
     - 8081:8081
@@ -83,11 +49,7 @@
     user: "root"
     privileged: "true"
     volumes:
-<<<<<<< HEAD
     - "/usr/share/jenkins:/var/jenkins_home"
-=======
-    - "./jenkins:/var/jenkins_home"
->>>>>>> dbefdc3c5c3c46a2aafd307d5987748b575a08b5
     - "/var/run/docker.sock:/var/run/docker.sock"
     - "/usr/local/bin/docker:/usr/local/bin/docker"
     #ports:

@@ -1,4 +1,0 @@
-- hosts: "{{ ehosts | default('local') }}"
-  become: true
-  roles:
-  - { role: heartbeat, tags: ["heartbeat"] }
