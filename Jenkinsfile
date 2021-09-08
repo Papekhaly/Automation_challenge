@@ -50,13 +50,17 @@ pipeline {
         stage('Test load elasticsearch'){
            steps {
                echo '> Load test elasticsearch...'
+
                sh 'locust -f tests/locust1.py --headless -u 10 -r 5 --host=http://localhost:9200'
-               }
+
+             }
         }
         stage('Test load kibana'){
            steps {
                echo '> Load test elasticsearch...'
+
                sh 'locust -f tests/locust_kibana.py --headless -u 10 -r 5 --host=http://localhost:5601'
+
                }
         }
         
