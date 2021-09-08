@@ -47,19 +47,12 @@ pipeline {
                sh 'py.test -v tests/test_elasticsearch.py'
                }
         }
-        stage('Test load elasticsearch'){
-           steps {
-               echo '> Load test elasticsearch...'
-
-               sh 'locust -f tests/locust1.py --headless -u 10 -r 5 --host=http://localhost:9200 --run-time 10s '
-
-             }
-        }
+        
         stage('Test load kibana'){
            steps {
                echo '> Load test kibana dashboard...'
 
-               sh 'locust -f tests/locust_kibana.py --headless -u 10 -r 5 --host=http://localhost:5601 --run-time 10s '
+               sh 'locust -f tests/locust.py --headless -u 10 -r 5 --host=http://localhost:5601 --run-time 10s '
 
                }
         }

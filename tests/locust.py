@@ -1,13 +1,17 @@
-from locust import HttpLocust, TaskSet, task, SequentialTaskSet
+import time
+from locust import HttpUser, task, between
 
-class MyTasks(TaskSet):
-    #when locust file start executing on_start() will be called first
+class QuickstartUser(HttpUser):
+    wait_time = between(1, 5)
+
+    @task
     def on_start(self):
         self.client.get("/")
 
-class MyWebsiteUser(HttpUser):
-    task_set= MyTasks
-    min_wait=100 #miliseconds
-    max_wait=5000 #miliseconds
-    # same as wait_time = between(0.100, 5) 
+    
+    #@task # 2 times login() will be calle<d
+    #def login(self):
+       # self.client.post("/",json={ "username": "elastic", "password": "axrPoo1vLmL0X59Keyf1" })
+
+
 
