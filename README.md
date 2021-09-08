@@ -1,7 +1,8 @@
 # Automation_challenge
 ELK stack with jenkins pipeline
 
-The ci-cd tools used are setting up and deployed by cicd_tools.yml playbook
+<h2>The ci-cd tools used are setting up and deployed by cicd_tools.yml playbook<h2>
+
 ![alt text](https://github.com/Papekhaly/Automation_challenge/blob/main/ci-cd_tools.PNG)
  
 1.1 ci/cd architecture
