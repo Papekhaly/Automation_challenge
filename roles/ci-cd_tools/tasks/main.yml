@@ -1,34 +1,3 @@
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_data
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_extensions
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_logs
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: sonarqube_temp
-#    driver: local
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: postgresql
-#    driver: local
-
-
-#- name: Create sonar volume
-#  docker_volume:
-#    name: postgresql_data
-#    driver: local
-
 - name: Start traefik container
   docker_container:
     name: "{{ traefik_hostname }}"
@@ -80,7 +49,7 @@
     user: "root"
     privileged: "true"
     volumes:
-    - "./jenkins:/var/jenkins_home"
+    - "/usr/share/jenkins:/var/jenkins_home"
     - "/var/run/docker.sock:/var/run/docker.sock"
     - "/usr/local/bin/docker:/usr/local/bin/docker"
     #ports:
