@@ -52,7 +52,7 @@ pipeline {
            steps {
                echo '> Load test kibana dashboard...'
 
-               sh 'locust -f tests/locust.py --headless -u 10 -r 5 --host=http://localhost:5601 --run-time 10s '
+               sh 'locust -f tests/locust.py --headless -u 10 -r 5 --host=http://191.168.1.44:5601 --run-time 10s '
 
                }
         }
