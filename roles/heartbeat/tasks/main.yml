@@ -10,6 +10,11 @@
     - { src: 'templates/heartbeat.yml', dest: '{{ heartbeat_conf_dir }}/heartbeat.yml' }
   notify: Restart heartbeat container
 
+- name: Wait for nginx container
+  pause:
+    seconds: 60
+
+
 - name: Check heartbeat template
   docker_container:
     name: "{{ heartbeat_hostname }}-run"

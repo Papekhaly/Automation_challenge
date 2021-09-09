@@ -9,9 +9,9 @@ class QuickstartUser(HttpUser):
         self.client.get("/")
 
     
-    #@task # 2 times login() will be calle<d
-    #def login(self):
-       # self.client.post("/",json={ "username": "elastic", "password": "axrPoo1vLmL0X59Keyf1" })
+#    @task(2) # 2 times login() will be calle<d
+#    def login(self):
+#        self.client.post("/",json={ "username": "elastic", "password": "axrPoo1vLmL0X59Keyf1" })
 
 
 
