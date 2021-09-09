@@ -6,7 +6,7 @@ pipeline {
     }
  
     stages {
-        stage('Git') {
+        stage('Git checkout') {
             steps {
                 echo '> Checking out the Git version control ...'
                 checkout scm
