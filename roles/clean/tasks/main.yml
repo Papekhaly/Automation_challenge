@@ -42,14 +42,6 @@
   tags:
   - heartbeat
 
-- name: Clean heartbeat conf dir
-  file:
-    state: absent
-    path: "{{ heartbeat_conf_dir }}"
-  tags:
-  - heartbeat
-
-
 - name: Remove traefik container
   docker_container:
     name: "{{ traefik_hostname }}"

@@ -10,10 +10,6 @@
     - { src: 'templates/heartbeat.yml', dest: '{{ heartbeat_conf_dir }}/heartbeat.yml' }
   notify: Restart heartbeat container
 
-- name: Wait for elastic container
-  pause:
-    seconds: 30
-
 
 - name: Check heartbeat template
   docker_container:
@@ -25,15 +21,20 @@
       /bin/bash -c 'curl -s --user "elastic:{{ elastic_password }}" -X GET "{{ elasticsearch_hostname }}:9200/_cat/templates?v&s=name&pretty" | grep heartbeat'
     networks:
     - name: "{{ network_name }}"
- # ignore_errors: yes
+  ignore_errors: yes
   changed_when: false
   register: check_heartbeat_template
+  retries: 3
+  delay: 10
+  until: check_heartbeat_template is not failed
 
 - name: Load heartbeat template
   docker_container:
     name: "{{ heartbeat_hostname }}-run"
     image: "{{ heartbeat_image }}"
     detach: false
+    retries: 5
+    delay: 10
     cleanup: true
     command: >
       setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["{{ elasticsearch_hostname }}:9200"]'
