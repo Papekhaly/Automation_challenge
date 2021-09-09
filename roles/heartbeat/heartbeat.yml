@@ -1,0 +1,12 @@
+name: "devops-srv01.ddns.net"
+output.logstash:
+  hosts: "logstash01:5000"
+setup.kibana:
+  host: "kibana01:5601"
+  user: "elastic"
+  password: "axrPoo1vLmL0X59Keyf1"
+heartbeat.monitors:
+- type: http
+  name: http
+  urls: ["https://devops-srv01.ddns.net/", "https://devops-srv01.ddns.net/jenkins/"]
+  schedule: "@every 60s"

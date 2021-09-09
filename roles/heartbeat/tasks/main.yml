@@ -12,7 +12,7 @@
 
 - name: Wait for elastic container
   pause:
-    seconds: 60
+    seconds: 30
 
 
 - name: Check heartbeat template
