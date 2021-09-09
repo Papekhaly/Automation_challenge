@@ -27,8 +27,8 @@ logstash_conf_dir: /usr/share/logstash
 
 heartbeat_image: docker.elastic.co/beats/heartbeat:7.4.0
 heartbeat_hostname: heartbeat01
-heartbeat_servername: status.example.com
-heartbeat_conf_dir: /usr/share/heartbeat/
+heartbeat_servername: devops-srv01.ddns.net
+heartbeat_conf_dir: /home/Automation_challenge/roles/heartbeat/
 heartbeat_urls:
 - https://devops-srv01.ddns.net/
 - https://devops-srv01.ddns.net/jenkins/
