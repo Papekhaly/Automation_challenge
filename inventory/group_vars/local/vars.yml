@@ -30,8 +30,9 @@ heartbeat_hostname: heartbeat01
 heartbeat_servername: status.example.com
 heartbeat_conf_dir: /home/Automation_challenge/roles/heartbeat/
 heartbeat_urls:
-- https://example.com
-- https://status.example.com
+- https://devops-srv01.ddns.net/
+- https://devops-srv01.ddns.net/jenkins/
+
 
 
 elastic_password: "{{ vault_elastic_password }}"
