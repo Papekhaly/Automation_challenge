@@ -9,8 +9,15 @@
   with_items:
     - { src: 'templates/heartbeat.yml', dest: '{{ heartbeat_conf_dir }}/heartbeat.yml' }
   notify: Restart heartbeat container
-- name: check if elasticsearch respond
-  shell: 'curl --user elastic:{{ elastic_password }} http://{{ elasticsearch_hostname }}:9200'
+
+
+- name: Check that you can connect (GET) to elasticsearch and it returns a status 200
+  uri:
+    url: http://localhost:9200
+    #no_log: true
+    method: GET
+    user: elastic
+    password: "{{ elastic_password }}"
   register: ping_elastic
   retries: 5
   delay: 10 
