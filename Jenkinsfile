@@ -6,7 +6,7 @@ pipeline {
     }
  
     stages {
-        stage('Git checkout') {
+        stage('Git checkout elk stack') {
             steps {
                 echo '> Checking out the Git version control ...'
                 checkout scm
