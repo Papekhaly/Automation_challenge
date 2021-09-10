@@ -33,14 +33,14 @@
     name: "{{ heartbeat_hostname }}-run"
     image: "{{ heartbeat_image }}"
     detach: false
-    retries: 5
-    delay: 10
     cleanup: true
     command: >
       setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["{{ elasticsearch_hostname }}:9200"]'
       -E 'output.elasticsearch.username="elastic"' -E 'output.elasticsearch.password="{{ elastic_password }}"'
     networks:
     - name: "{{ network_name }}"
+  retries: 3
+  delay: 10
   when: elasticsearch_hostname is defined and check_heartbeat_template.failed
 
 - name: Start heartbeat container
