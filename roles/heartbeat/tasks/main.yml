@@ -19,7 +19,7 @@
     user: elastic
     password: "{{ elastic_password }}"
   register: ping_elastic
-  retries: 5
+  retries: 7
   delay: 10 
   until: ping_elastic is not failed
 
