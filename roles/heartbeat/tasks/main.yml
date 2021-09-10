@@ -10,7 +10,7 @@
     - { src: 'templates/heartbeat.yml', dest: '{{ heartbeat_conf_dir }}/heartbeat.yml' }
   notify: Restart heartbeat container
 - name: check if elasticsearch respond
-  shell: 'curl --user elastic:{{ elastic_password }} localhost:9200'
+  shell: 'curl --user elastic:{{ elastic_password }} http://{{ elasticsearch_hostname }}:9200'
   register: ping_elastic
   retries: 5
   delay: 10 
